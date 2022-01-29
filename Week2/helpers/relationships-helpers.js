@@ -1,14 +1,18 @@
 const createResearchPaperDB = `
-    CREATE TABLE IF NOT EXISTS research_Papers(
-      paper_id INT PRIMARY KEY AUTO_INCREMENT,
-      paper_title VARCHAR(50),conference TEXT,
-      publish_date DATE
-    );`;
-const addForeignKeyToResearchPaper = `
- ALTER TABLE research_Papers ADD fk_author_no INT`;
-const addAuthorForeignKeyToResearch = `
-ALTER TABLE research_Papers 
-ADD FOREIGN KEY (fk_author_no) REFERENCES author(author_no);`;
+  CREATE TABLE IF NOT EXISTS research_Papers(
+  paper_id INT PRIMARY KEY AUTO_INCREMENT,
+  paper_title VARCHAR(300),conference VARCHAR(300),
+  publish_date DATE
+  );`;
+
+const createResearchPapersAuthors = `
+  CREATE TABLE IF NOT EXISTS research_papers_authors (
+  author_no INT,
+  paper_id INT,
+  FOREIGN KEY (author_no) REFERENCES author (author_no),
+  FOREIGN KEY (paper_id) REFERENCES research_Papers (paper_id),
+  PRIMARY KEY (author_no, paper_id)
+  );`;
 const insertIntoAuthor = [
   {
     author_no: 1,
@@ -161,215 +165,221 @@ const insertResearchPapers = [
     paper_title: 'Javascript',
     conference: 'Central Academy',
     publish_date: '2000-01-01',
-    fk_author_no: 1,
   },
   {
     paper_id: 12,
     paper_title: 'Node JS',
     conference: 'HYF Academy',
     publish_date: '2000-02-01',
-    fk_author_no: 8,
   },
   {
     paper_id: 13,
     paper_title: 'Javascript',
     conference: 'HYF Academy',
     publish_date: '2000-03-01',
-    fk_author_no: 2,
   },
   {
     paper_id: 14,
     paper_title: 'Angular JS',
     conference: 'Cambridge Academy',
     publish_date: '2000-04-01',
-    fk_author_no: 2,
   },
   {
     paper_id: 15,
     paper_title: 'Vue JS',
     conference: 'HYF Academy',
     publish_date: '2002-02-01',
-    fk_author_no: 3,
   },
   {
     paper_id: 16,
     paper_title: 'Node JS',
     conference: 'HYF Academy',
     publish_date: '2000-02-01',
-    fk_author_no: 3,
   },
   {
     paper_id: 17,
     paper_title: 'React JS',
     conference: 'MIT Academy',
     publish_date: '1995-02-01',
-    fk_author_no: 1,
   },
   {
     paper_id: 18,
     paper_title: 'HTML',
     conference: 'HYF Academy',
     publish_date: '2000-02-01',
-    fk_author_no: 7,
   },
   {
     paper_id: 19,
     paper_title: 'HTML',
     conference: 'Cambridge Academy',
     publish_date: '2000-08-01',
-    fk_author_no: 6,
   },
   {
     paper_id: 20,
     paper_title: 'CSS',
     conference: 'EL-Ehzer Academy',
     publish_date: '2002-02-01',
-    fk_author_no: 6,
   },
   {
     paper_id: 21,
     paper_title: 'Tailwind',
     conference: 'HYF Academy',
     publish_date: '2005-02-01',
-    fk_author_no: 1,
   },
   {
     paper_id: 22,
     paper_title: 'Bootstrap 4.1',
     conference: 'Inonu Academy',
     publish_date: '2004-02-01',
-    fk_author_no: 13,
   },
   {
     paper_id: 23,
     paper_title: 'Node JS',
     conference: 'Amsterdam Academy',
     publish_date: '2006-02-01',
-    fk_author_no: 1,
   },
   {
     paper_id: 24,
     paper_title: 'SQL and MYSQL',
     conference: 'Groningen Academy',
     publish_date: '2008-02-01',
-    fk_author_no: 14,
   },
   {
     paper_id: 25,
     paper_title: 'Mongoose',
     conference: 'Utrecht Academy',
     publish_date: '2006-02-01',
-    fk_author_no: 5,
   },
   {
     paper_id: 26,
     paper_title: 'Next JS',
     conference: 'HYF Academy',
     publish_date: '2005-02-01',
-    fk_author_no: 12,
   },
   {
     paper_id: 27,
     paper_title: 'TypeScript',
     conference: 'Maastricht Academy',
     publish_date: '2008-02-01',
-    fk_author_no: 3,
   },
   {
     paper_id: 28,
     paper_title: 'Angular JS',
     conference: 'Maastricht Academy',
     publish_date: '2007-02-01',
-    fk_author_no: 3,
   },
   {
     paper_id: 29,
     paper_title: 'API and Browser',
     conference: 'HYF Academy',
     publish_date: '2004-02-01',
-    fk_author_no: 14,
   },
   {
     paper_id: 30,
     paper_title: 'Vue JS',
     conference: 'Amsterdam Academy',
     publish_date: '2009-05-01',
-    fk_author_no: 1,
   },
   {
     paper_id: 31,
     paper_title: 'React Native JS',
     conference: 'Groningen Academy',
     publish_date: '2009-09-09',
-    fk_author_no: 9,
   },
   {
     paper_id: 32,
     paper_title: 'Node JS',
     conference: 'HYF Academy',
     publish_date: '2000-02-01',
-    fk_author_no: 2,
   },
   {
     paper_id: 33,
     paper_title: 'GraphQL ',
     conference: 'Inonu Academy',
     publish_date: '2009-06-01',
-    fk_author_no: 4,
   },
   {
     paper_id: 34,
     paper_title: 'Python',
     conference: 'Cambridge Academy',
     publish_date: '2000-12-01',
-    fk_author_no: 12,
   },
   {
     paper_id: 35,
     paper_title: 'Django',
     conference: 'HYF Academy',
     publish_date: '2012-02-01',
-    fk_author_no: 13,
   },
   {
     paper_id: 36,
     paper_title: 'SQLite',
     conference: 'Groningen Academy',
     publish_date: '2014-02-01',
-    fk_author_no: 14,
   },
   {
     paper_id: 37,
     paper_title: 'Java',
     conference: 'HYF Academy',
     publish_date: '2012-02-01',
-    fk_author_no: 4,
   },
   {
     paper_id: 38,
     paper_title: 'PHP',
     conference: 'HYF Academy',
     publish_date: '2015-02-01',
-    fk_author_no: 5,
   },
   {
     paper_id: 39,
     paper_title: 'Go',
     conference: 'Inonu Academy',
     publish_date: '2019-02-01',
-    fk_author_no: 9,
   },
   {
     paper_id: 40,
     paper_title: 'Typescript',
     conference: 'Oxford Academy',
     publish_date: '2004-02-01',
-    fk_author_no: 14,
   },
 ];
 
+const insertIntoAuthorsAndPapers = `
+  INSERT INTO research_papers_authors (author_no, paper_id) VALUES ? ;`;
+const authorAndPaperValues = [
+  [1, 38],
+  [1, 12],
+  [1, 13],
+  [2, 14],
+  [2, 15],
+  [2, 16],
+  [3, 17],
+  [3, 18],
+  [5, 19],
+  [5, 20],
+  [5, 21],
+  [6, 22],
+  [6, 23],
+  [7, 24],
+  [7, 25],
+  [7, 26],
+  [9, 39],
+  [9, 22],
+  [10, 40],
+  [10, 20],
+  [28, 31],
+  [28, 27],
+  [13, 27],
+  [13, 33],
+  [13, 36],
+  [14, 14],
+  [14, 16],
+  [14, 17],
+  [15, 27],
+  [15, 32],
+];
+
 module.exports.createResearchPaperDB = createResearchPaperDB;
-module.exports.addForeignKeyToResearchPaper = addForeignKeyToResearchPaper;
-module.exports.addAuthorForeignKeyToResearch = addAuthorForeignKeyToResearch;
 module.exports.insertIntoAuthor = insertIntoAuthor;
 module.exports.insertResearchPapers = insertResearchPapers;
+module.exports.createResearchPapersAuthors = createResearchPapersAuthors;
+module.exports.authorAndPaperValues = authorAndPaperValues;
+module.exports.insertIntoAuthorsAndPapers = insertIntoAuthorsAndPapers;

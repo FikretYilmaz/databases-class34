@@ -2,10 +2,11 @@ const util = require('util');
 const mysql = require('mysql');
 const {
   createResearchPaperDB,
+  createResearchPapersAuthors,
   insertIntoAuthor,
-  addForeignKeyToResearchPaper,
-  addAuthorForeignKeyToResearch,
   insertResearchPapers,
+  insertIntoAuthorsAndPapers,
+  authorAndPaperValues,
 } = require('./helpers/relationships-helpers');
 
 const connection = mysql.createConnection({
@@ -21,8 +22,7 @@ async function addResearchPaper() {
   connection.connect();
   try {
     await execQuery(createResearchPaperDB);
-    await execQuery(addForeignKeyToResearchPaper);
-    await execQuery(addAuthorForeignKeyToResearch);
+    await execQuery(createResearchPapersAuthors);
 
     for (const author of insertIntoAuthor) {
       const resultAuthor = await execQuery('INSERT INTO author SET ?', author);
@@ -33,6 +33,7 @@ async function addResearchPaper() {
         paper,
       );
     }
+    await execQuery(insertIntoAuthorsAndPapers, [authorAndPaperValues]);
   } catch (error) {
     console.error(error);
     connection.end();

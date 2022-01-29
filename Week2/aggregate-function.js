@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const util = require('util');
 const {
   allResearchPapers,
   sumOfFemaleResearchPapers,
@@ -13,78 +14,19 @@ const connection = mysql.createConnection({
   password: 'hyfpassword',
   database: 'authors',
 });
-connection.connect((err) => {
-  if (err) {
-    throw err;
-  }
-  console.log('Mysql Connected');
-});
 
-function findAllResearchPapers() {
-  try {
-    connection.query(allResearchPapers, (err, result, fields) => {
-      if (err) {
-        throw err;
-      }
-      console.table(result);
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
-function findSumOfFemaleResearchPapers() {
-  try {
-    connection.query(sumOfFemaleResearchPapers, (err, result, fields) => {
-      if (err) {
-        throw err;
-      }
-      console.table(result);
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
-function findAvgOfHIndex() {
-  try {
-    connection.query(avgOfHIndex, (err, result, fields) => {
-      if (err) {
-        throw err;
-      }
-      console.table(result);
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-function findAuthorResearches() {
-  try {
-    connection.query(authorResearches, (err, result, fields) => {
-      if (err) {
-        throw err;
-      }
-      console.table(result);
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
-function findMinAndMaxHIndex() {
-  try {
-    connection.query(minAndMaxHIndex, (err, result, fields) => {
-      if (err) {
-        throw err;
-      }
-      console.table(result);
-    });
-  } catch (error) {
-    console.error(error);
-    connection.end();
-  }
-  connection.end();
-}
-findAllResearchPapers();
-findSumOfFemaleResearchPapers();
-findAvgOfHIndex();
-findAuthorResearches();
-findMinAndMaxHIndex();
+const execQuery = (connection, query) => {
+  connection.query(query, (error, results) => {
+    if (error) {
+      throw error;
+    }
+    console.table(results);
+  });
+};
+connection.connect();
+execQuery(connection, allResearchPapers);
+execQuery(connection, sumOfFemaleResearchPapers);
+execQuery(connection, avgOfHIndex);
+execQuery(connection, authorResearches);
+execQuery(connection, minAndMaxHIndex);
+connection.end();

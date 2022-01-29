@@ -1,4 +1,6 @@
 const mysql = require('mysql');
+const util = require('util');
+
 const {
   authorsAndMentors,
   authorsAndPublishPapers,
@@ -10,39 +12,15 @@ const connection = mysql.createConnection({
   password: 'hyfpassword',
   database: 'authors',
 });
-connection.connect((err) => {
-  if (err) {
-    throw error;
-  }
-  console.log('Mysql Connected');
-});
-
-function findAuthorsAndMentors() {
-  try {
-    connection.query(authorsAndMentors, (err, result, fields) => {
-      if (err) {
-        throw err;
-      }
-      console.log(result);
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
-function findAuthorsAndPublish() {
-  try {
-    connection.query(authorsAndPublishPapers, (err, result, fields) => {
-      if (err) {
-        throw err;
-      }
-      console.table(result);
-    });
-  } catch (error) {
-    console.error(error);
-    connection.end();
-  }
-  connection.end();
-}
-
-findAuthorsAndMentors();
-findAuthorsAndPublish();
+const execQuery = (connection, query) => {
+  connection.query(query, (error, results) => {
+    if (error) {
+      throw error;
+    }
+    console.table(results);
+  });
+};
+connection.connect();
+execQuery(connection, authorsAndMentors);
+execQuery(connection, authorsAndPublishPapers);
+connection.end();
