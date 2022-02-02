@@ -55,7 +55,7 @@ const insertIntoTransfer = [
     account_number: 101,
     amount: 200,
     change_date: mydate,
-    remark: `Send money to account number`,
+    remark: `The money sended successfully`,
   },
 ];
 
