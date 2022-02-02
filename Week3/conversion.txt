@@ -1,0 +1,3 @@
+1. In Mysql Workbench, right click on the table and export table as a <tablename>.json
+2.Open the MongoDb Compass and create db. Then create collections with name of the table you export from SQL.
+3. In MongoDb Compass on my collection click to 'ADD DATA' button then choose 'Import File'. After find the my <tablename>.json file all data Imported to my MogoDB. 

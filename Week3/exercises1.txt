@@ -1,0 +1,7 @@
+1.) food_code and food description have more than one value
+dinner_date has different type of date
+2.) Column about Dinner venue and food could be separate
+3.) First Table : member_id, member_name,member_address
+    Second Table: dinner_id, dinner_date
+    Third Table : venues_code, venue_description
+    Fourth Table: food_code, food_description
