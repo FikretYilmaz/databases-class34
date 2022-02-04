@@ -21,7 +21,7 @@ const connectDbWeek3 = 'USE dbWeek3';
 const accountTable = `
 CREATE TABLE IF NOT EXISTS account(
   account_number INT,
-  balance INT,
+  balance BIGINT,
   PRIMARY KEY (account_number));`;
 
 const account_changes = `
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS account_changes(
   change_number INT,
   account_number INT,
   amount INT,
-  change_date DATE,
+  change_date DATETIME,
   remark VARCHAR(300),
   FOREIGN KEY (account_number) REFERENCES account (account_number));`;
 

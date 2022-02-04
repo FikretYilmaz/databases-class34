@@ -58,6 +58,16 @@ const insertIntoTransfer = [
     remark: `The money sended successfully`,
   },
 ];
+const insertIntoTransfer2 = [
+  {
+    change_number: 101,
+    account_number: 109,
+    amount: 20000,
+    change_date: mydate,
+    remark: `The money sended successfully`,
+  },
+];
 
 module.exports.insertIntoAccount = insertIntoAccount;
 module.exports.insertIntoTransfer = insertIntoTransfer;
+module.exports.insertIntoTransfer2 = insertIntoTransfer2;
